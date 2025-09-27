@@ -285,7 +285,6 @@ section {
 
 .about-pic {
   border-radius: 2rem;
-  
 }
 
 .arrow {
@@ -378,7 +377,7 @@ article .icon {
 
 .project-btn {
   color: black;
-  border-color: rgb(163, 163, 163);
+  border-color: rgb(0, 0, 0);
 }
 
 /* CONTACT */
@@ -394,8 +393,8 @@ article .icon {
   display: flex;
   justify-content: center;
   border-radius: 2rem;
-  border: rgb(53, 53, 53) 0.1rem solid;
-  border-color: rgb(163, 163, 163);
+  border: rgb(0, 0, 0) 0.1rem solid;
+  border-color: rgb(0, 0, 0);
   background: (250, 250, 250);
   margin: 2rem auto;
   padding: 0.5rem;
@@ -430,4 +429,54 @@ footer {
 
 footer p {
   text-align: center;
+}
+
+/* ACADEMIC TABLE STYLES (Adapted to match portfolio aesthetic) */
+
+.academic-section {
+  margin-bottom: 40px;
+  padding: 20px;
+  /* Use portfolio border color and rounded corners */
+  border: rgb(163, 163, 163) 0.1rem solid;
+  border-radius: 2rem; 
+  background-color: #fff;
+  /* Resetting margin to fit within a section if needed */
+  margin: 2rem 0; 
+}
+
+h2 {
+  color: rgb(53, 53, 53); /* Dark color from portfolio style */
+  border-bottom: rgb(53, 53, 53) 2px solid;
+  padding-bottom: 5px;
+  margin-top: 0;
+  font-size: 1.75rem; /* Match experience subtitle size */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  /* Use a lighter grey for inner borders */
+  border: 1px solid rgb(181, 181, 181); 
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2; /* Light header background */
+  color: rgb(0, 0, 0); /* Black text */
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Subtle alternating row color */
+}
+
+.total-row td {
+  font-weight: bold;
+  background-color: #e9ecef; /* Slightly darker total row background */
+  color: rgb(53, 53, 53);
 }
