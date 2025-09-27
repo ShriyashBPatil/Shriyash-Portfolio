@@ -5,6 +5,8 @@
 * {
   margin: 0;
   padding: 0;
+  /* Ensure border and padding are included in the element's total width and height */
+  box-sizing: border-box; 
 }
 
 body {
@@ -150,7 +152,8 @@ a:hover {
 
 section {
   padding-top: 4vh;
-  height: 96vh;
+  /* Removed fixed height to allow vertical flow */
+  height: auto; 
   margin: 0 10rem;
   box-sizing: border-box;
   min-height: fit-content;
@@ -431,7 +434,9 @@ footer p {
   text-align: center;
 }
 
+/* ======================== */
 /* ACADEMIC TABLE STYLES (Adapted to match portfolio aesthetic) */
+/* ======================== */
 
 .academic-section {
   margin-bottom: 40px;
@@ -440,43 +445,114 @@ footer p {
   border: rgb(163, 163, 163) 0.1rem solid;
   border-radius: 2rem; 
   background-color: #fff;
-  /* Resetting margin to fit within a section if needed */
-  margin: 2rem 0; 
+  margin-top: 2rem; 
 }
 
-h2 {
-  color: rgb(53, 53, 53); /* Dark color from portfolio style */
+.academic-section h2 {
+  color: rgb(53, 53, 53); 
   border-bottom: rgb(53, 53, 53) 2px solid;
   padding-bottom: 5px;
   margin-top: 0;
-  font-size: 1.75rem; /* Match experience subtitle size */
+  font-size: 1.75rem; 
 }
 
-table {
+.academic-section table {
+  /* Set width to 100% of its container (the wrapper) */
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
 }
 
-th, td {
-  /* Use a lighter grey for inner borders */
+.academic-section th, .academic-section td {
   border: 1px solid rgb(181, 181, 181); 
   padding: 10px;
   text-align: left;
 }
 
-th {
-  background-color: #f2f2f2; /* Light header background */
-  color: rgb(0, 0, 0); /* Black text */
+.academic-section th {
+  background-color: #f2f2f2; 
+  color: rgb(0, 0, 0); 
   font-weight: 600;
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9; /* Subtle alternating row color */
+.academic-section tr:nth-child(even) {
+  background-color: #f9f9f9; 
 }
 
-.total-row td {
+.academic-section .total-row td {
   font-weight: bold;
-  background-color: #e9ecef; /* Slightly darker total row background */
+  background-color: #e9ecef; 
   color: rgb(53, 53, 53);
+}
+
+/* ======================== */
+/* MEDIA QUERY FOR TABLETS AND MOBILE DEVICES (<= 768px) */
+/* ======================== */
+@media screen and (max-width: 768px) {
+    /* GENERAL LAYOUT ADJUSTMENTS */
+    nav {
+        height: 6vh;
+    }
+
+    section {
+        /* FIX: Greatly reduces the large margin to fit phone screen */
+        margin: 0 1rem; 
+        min-height: fit-content; 
+        padding-top: 2vh;
+        height: auto; 
+    }
+
+    .section-container {
+        flex-direction: column; 
+    }
+
+    /* HEADER & NAVIGATION */
+    #desktop-nav {
+        display: none; 
+    }
+
+    #hamburger-nav {
+        display: flex; 
+    }
+
+    /* PROFILE & ABOUT SECTIONS */
+    #profile {
+        gap: 1rem;
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .section__text__p2 {
+        font-size: 1.25rem;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+
+    /* ACADEMIC TABLE SPECIFIC STYLING (The Mobile Fix!) */
+    .academic-section {
+        padding: 10px;
+        border-radius: 1rem; 
+    }
+    
+    /* Wrapper for horizontal scrolling - MUST be in your HTML */
+    .table-responsive-wrapper {
+        overflow-x: auto; /* This is the key to fixing the spillover */
+        width: 100%;
+    }
+
+    /* Forces the table columns to shrink/scroll */
+    .academic-section table {
+        /* This ensures the table will be wider than the phone screen, 
+           triggering the scrollbar on the wrapper */
+        min-width: 600px; 
+        width: max-content; 
+    }
+
+    /* Reduce padding and font size for dense content */
+    .academic-section th, .academic-section td {
+        padding: 8px 5px; 
+        font-size: 0.8rem;
+    }
 }
