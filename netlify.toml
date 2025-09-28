@@ -14,7 +14,6 @@
   to = "/sitemap.xml"
   status = 200
   force = true
-
 # Handles SPA pushstate routing (should be last)
 [[redirects]]
   from = "/*"
