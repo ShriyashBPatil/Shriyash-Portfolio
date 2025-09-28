@@ -1,0 +1,1 @@
+This is a test file to verify the Vercel file serving configuration is working correctly.
