@@ -45,6 +45,16 @@
   .about-containers {
     margin-top: 0;
   }
+
+  .hackathon-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-image {
+    margin-bottom: 2rem;
+    width: 100%; /* Ensure feature image container takes full width */
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -68,6 +78,15 @@
   .btn-container {
     flex-wrap: wrap;
   }
+
+  .hackathon-container {
+    padding: 0 1rem; /* Add horizontal padding on small screens */
+  }
+
+  .feature-image img {
+    max-width: 100%; /* Ensure image is not wider than its container */
+  }
+
   .contact-info-container {
     margin: 0;
   }
