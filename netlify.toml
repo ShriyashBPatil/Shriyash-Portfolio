@@ -1,21 +1,34 @@
+# Force sitemap.xml to be served as XML
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml; charset=UTF-8"
     X-Content-Type-Options = "nosniff"
 
+# Security headers for other pages
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
 
+# Specific rule for sitemap.xml to prevent SPA redirect
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
   status = 200
+  force = true
 
+# Home page redirect
 [[redirects]]
   from = "/home"
   to = "/"
   status = 301
+  force = true
+
+# SPA fallback - this should be the last rule
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
