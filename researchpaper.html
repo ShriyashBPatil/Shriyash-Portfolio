@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Labs: Self-Hosted Digital Ecosystem - Shriyash Patil</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+
+    <style>
+        /* GENERAL */
+
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            line-height: 1.6;
+            background-color: white; /* Changed for clean section background */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        p {
+            color: rgb(85, 85, 85);
+        }
+
+        /* TRANSITION */
+
+        a,
+        .btn {
+            transition: all 300ms ease;
+        }
+
+        /* DESKTOP NAV (Kept for compatibility, though this page is the content) */
+
+        nav,
+        .nav-links {
+            display: flex;
+        }
+
+        nav {
+            justify-content: space-around;
+            align-items: center;
+            height: 17vh;
+        }
+
+        .nav-links {
+            gap: 2rem;
+            list-style: none;
+            font-size: 1.5rem;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+            text-decoration-color: white;
+        }
+
+        a:hover {
+            color: grey;
+            text-decoration: underline;
+            text-underline-offset: 1rem;
+            text-decoration-color: rgb(181, 181, 181);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .logo:hover {
+            cursor: default;
+        }
+
+        /* HAMBURGER MENU (Kept for compatibility) */
+
+        #hamburger-nav {
+            display: none;
+        }
+
+        .hamburger-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 24px;
+            width: 30px;
+            cursor: pointer;
+        }
+
+        .hamburger-icon span {
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-links {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            width: fit-content;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-links a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            color: black;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-links li {
+            list-style: none;
+        }
+
+        .menu-links.open {
+            max-height: 300px;
+        }
+
+        .hamburger-icon.open span:first-child {
+            transform: rotate(45deg) translate(10px, 5px);
+        }
+
+        .hamburger-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-icon.open span:last-child {
+            transform: rotate(-45deg) translate(10px, -5px);
+        }
+
+        /* SECTIONS - MODIFIED FOR PROJECT PAGE LAYOUT */
+
+        section {
+            padding: 4vh 0;
+            margin: 0 10rem;
+            box-sizing: border-box;
+            /* Removed min-height: 96vh; to allow content to flow naturally */
+        }
+
+        #research-homelab {
+            padding: 10vh 0; /* Extra top padding for main content */
+        }
+        
+        section:not(:first-child) {
+            border-top: 1px solid rgb(240, 240, 240);
+            padding-top: 6vh;
+        }
+
+        .section-container {
+            display: flex;
+            gap: 4rem;
+            height: 80%;
+        }
+
+        /* PROFILE SECTION (Modified to be the Title Block) */
+
+        .section__text {
+            align-self: center;
+            text-align: center;
+        }
+
+        .section__text p {
+            font-weight: 600;
+        }
+
+        .section__text__p1 {
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .section__text__p2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: rgb(53, 53, 53); /* Darker text for secondary title */
+        }
+
+        .title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* ICONS */
+
+        .icon {
+            cursor: pointer;
+            height: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* BUTTONS */
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            font-weight: 600;
+            transition: all 300ms ease;
+            padding: 1rem;
+            width: auto; /* Adjust width to fit content */
+            min-width: 8rem;
+            border-radius: 2rem;
+            border: rgb(53, 53, 53) 0.1rem solid;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-color-1,
+        .btn-color-2 {
+            border: rgb(53, 53, 53) 0.1rem solid;
+        }
+
+        .btn-color-1:hover,
+        .btn-color-2:hover {
+            cursor: pointer;
+        }
+
+        .btn-color-1,
+        .btn-color-2:hover {
+            background: rgb(53, 53, 53);
+            color: white;
+        }
+
+        .btn-color-1 {
+            background: rgb(53, 53, 53);
+            color: white;
+        }
+
+        .btn-color-1:hover {
+            background: rgb(0, 0, 0);
+        }
+
+        .btn-color-2 {
+            background: none;
+            color: black;
+        }
+
+        .btn-color-2:hover {
+            border: rgb(53, 53, 53) 0.1rem solid; /* Kept original hover color */
+            background: rgb(53, 53, 53);
+            color: white;
+        }
+
+        /* ABOUT/DETAIL SECTIONS */
+
+        .about-containers {
+            gap: 2rem;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap; /* Allows wrapping on small screens */
+            justify-content: center;
+        }
+
+        .about-details-container {
+            justify-content: center;
+            flex-direction: column;
+            display: flex;
+            width: 100%; /* Full width container for abstract */
+        }
+
+        .details-container {
+            padding: 1.5rem;
+            flex: 1;
+            background: white;
+            border-radius: 2rem;
+            border: rgb(53, 53, 53) 0.1rem solid;
+            border-color: rgb(163, 163, 163);
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            min-width: 300px; /* Ensure cards don't get too narrow */
+        }
+
+        .details-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-color: rgb(53, 53, 53);
+        }
+
+        .details-container h3 {
+            margin-bottom: 1rem;
+            color: rgb(53, 53, 53);
+        }
+
+        .text-container {
+            margin-top: 0; /* Adjusted for better spacing */
+        }
+
+        .text-container p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .image-container {
+            width: 100%;
+            max-width: 550px;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+
+        /* EXPERIENCE SECTION (Used for Sub-Sections) */
+
+        .experience-sub-title {
+            color: rgb(85, 85, 85);
+            font-weight: 600;
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .experience-details-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .article-container {
+            display: flex;
+            text-align: initial;
+            flex-wrap: wrap;
+            flex-direction: row;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        article {
+            display: flex;
+            width: auto;
+            min-width: 10rem;
+            justify-content: center;
+            gap: 0.5rem;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        /* UTILITY CLASSES */
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mb-3 { margin-bottom: 3rem; }
+
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mt-3 { margin-top: 3rem; }
+
+        /* FOOTER SECTION (Adjusted for this page) */
+
+        footer {
+            height: auto; /* Allow content to dictate height */
+            padding: 3vh 1rem;
+            margin: 0 10rem;
+            background: rgb(250, 250, 250);
+            border-top: 1px solid rgb(240, 240, 240);
+        }
+
+        /* MEDIA QUERIES */
+        @media screen and (max-width: 1024px) {
+            section {
+                margin: 0 4rem;
+            }
+            .about-containers {
+                flex-direction: column;
+            }
+            .details-container {
+                min-width: auto;
+            }
+            .about-details-container {
+                padding-left: 0;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            section {
+                margin: 0 2rem;
+                padding: 2vh 0;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .section__text__p2 {
+                font-size: 1.5rem;
+            }
+            .experience-sub-title {
+                font-size: 1.5rem;
+            }
+            footer {
+                margin: 0 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="desktop-nav">
+        <div class="logo">Shriyash Patil</div>
+      
+    </nav>
+
+    <section id="research-homelab">
+        <p class="section__text__p1">Case Study | Submitted Nov 25th, 2023</p>
+        <h1 class="title">Home Labs: Self-Hosted Digital Ecosystem</h1>
+         <p class="section__text__p2">Self-Hosted Cloud Storage, Media, Ad Blocking, and Code Development [cite: 15, 12]</p>
+
+        <div class="about-details-container">
+            <div class="details-container text-container mb-3">
+                <h3>Abstract & Motivation</h3>
+                <p>
+                     The rise of self-hosted home labs is a compelling response to growing concerns about  data privacy, personalization, and control  in the digital age[cite: 532, 533].  This project presents a methodology for setting up a self-hosted ecosystem, integrating essential services to give the user total control over their data and digital experience[cite: 26, 535].
+                </p>
+                <p class="text-center" style="font-style: italic; font-weight: 500; color: #282828;">
+                     The integrated system includes Cloud Storage, a Torrent Client, a Media Server, a Network-Wide Ad-Blocker, and a Code Development Server[cite: 37].
+                </p>
+                
+                <div class="btn-container mt-2">
+                    <button class="btn btn-color-1" onclick="window.open('./assets/Research Paper.pdf', '_blank')">
+                        Download Research Paper (PDF)
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="mt-3">
+
+        <h2 class="experience-sub-title text-center mb-2 mt-3">Technology & Architecture</h2>
+        
+        <div class="image-container">
+             <img src="./assets/raspberry-pi-5.webp" alt="Raspberry Pi 5 Board Components" class="project-img">
+             <p class="text-center section__text__p1" style="margin-top: 10px;">The Raspberry Pi 5 Single Board Computer [cite: 12]</p>
+        </div>
+
+
+        <div class="about-containers mb-3">
+            <div class="details-container">
+                <h3>Hardware & OS Foundation</h3>
+                <ul style="list-style-type: none; padding: 0; text-align: left;">
+                     <li><strong style="color: rgb(53, 53, 53);">SBC:</strong>  Raspberry Pi 5  (chosen for its cost, power-efficiency, and performance)[cite: 49, 388, 389].</li>
+                     <li><strong style="color: rgb(53, 53, 53);">CPU:</strong> Broadcom BCM2712 2.4GHz quad-core 64-bit Arm Cortex-A76[cite: 67].</li>
+                     <li><strong style="color: rgb(53, 53, 53);">OS:</strong>  Raspberry Pi OS Lite (64-bit)  (Linux ARM-64 Based)[cite: 77].</li>
+                     <li><strong style="color: rgb(53, 53, 53);">Access:</strong> Server is accessed  headless  using  SSH (Secure Shell)  to conserve resources[cite: 391, 393].</li>
+                </ul>
+            </div>
+
+            <div class="details-container">
+                <h3>Core Software Stack</h3>
+                <ul style="list-style-type: none; padding: 0; text-align: left;">
+                     <li><strong style="color: rgb(53, 53, 53);">Virtualization:</strong>  Docker  (uses OS-level virtualization to deliver software in isolated containers)[cite: 397].</li>
+                     <li><strong style="color: rgb(53, 53, 53);">Management UI:</strong>  Portainer  (lightweight management tool for Docker environments)[cite: 398].</li>
+                     <li><strong style="color: rgb(53, 53, 53);">Web/DB:</strong>  Apache2  (Web Server) [cite: 403] , PHP, and  MariaDB  (Database Server)[cite: 82].</li>
+                     <li><strong style="color: rgb(53, 53, 53);">Security:</strong>  Twingate  (docker image) for secure, private remote access[cite: 401, 402].</li>
+                </ul>
+            </div>
+        </div>
+        
+        <hr class="mt-3">
+
+        <h2 class="experience-sub-title text-center mb-2 mt-3">Integrated Services & Applications</h2>
+        <div class="experience-details-container">
+            <div class="about-containers">
+                <div class="details-container">
+                    <h3>Cloud & Development</h3>
+                    <div class="article-container">
+                        <article>
+                             <p><strong>Nextcloud:</strong> File hosting, office suite, and calendar[cite: 227].</p>
+                        </article>
+                        <article>
+                             <p><strong>Code Server:</strong> Run  VSCode  in the browser remotely[cite: 451].</p>
+                        </article>
+                    </div>
+                </div>
+                <div class="details-container">
+                    <h3>Media & Networking</h3>
+                    <div class="article-container">
+                        <article>
+                             <p><strong>Jellyfin:</strong> Free software media server for streaming[cite: 446].</p>
+                        </article>
+                        <article>
+                             <p><strong>Pi-hole:</strong> Network-wide DNS-based ad and tracker blocker[cite: 314].</p>
+                        </article>
+                        <article>
+                             <p><strong>Qbittorrent:</strong> Torrent client for file downloading[cite: 305].</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-3">
+        
+        <h2 class="experience-sub-title text-center mb-2 mt-3">Performance & Metrics</h2>
+        <div class="about-containers">
+            <div class="details-container">
+                <h3>Database Comparison (Memory)</h3>
+                <div class="image-container" style="max-width: 400px; margin: 1rem auto;">
+                    <img src="./assets/p1.png" alt="MariaDB vs MySQL Memory Usage" class="project-img">
+                </div>
+                <ul style="list-style-type: none; padding: 0; text-align: left; font-size: 0.95rem;">
+                     <li><strong style="color: #c84142;">Result:</strong> MariaDB consumed the least amount of memory across all use cases (Idle, Moderate, Heavy)[cite: 471].</li>
+                     <li><strong style="color: #c84142;">Heavy Usage:</strong> MariaDB used  200  memory units compared to MySQL's  887 , confirming its choice for performance-focused home labs[cite: 471, 486, 482].</li>
+                </ul>
+            </div>
+            
+            <div class="details-container">
+                <h3>Server Stress Testing</h3>
+                <div class="image-container" style="max-width: 400px; margin: 1rem auto;">
+                    <img src="./assets/p2.png" alt="Jellyfin Streams vs CPU Utilization Graph" class="project-img">
+                </div>
+                <ul style="list-style-type: none; padding: 0; text-align: left; font-size: 0.95rem;">
+                     <li><strong style="color: #c84142;">Jellyfin Load:</strong> The server successfully handled  7 simultaneous users  streaming media[cite: 524].  Stream lag occurred upon the 8th user connection[cite: 525, 526].</li>
+                     <li><strong style="color: #c84142;">Ad Blocker Benefit:</strong> Pi-hole reduces bandwidth usage and data consumption by preventing unwanted traffic, improving overall network performance[cite: 443, 444].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="btn-container mt-3">
+            <button class="btn btn-color-2" onclick="window.open('https://github.com/ShriyashBPatil/HomeLab-Dashboard', '_blank')" style="min-width: 15rem;">
+                <img src="https://i.imgur.com/Github-icon.png" alt="GitHub Icon" class="icon" style="height: 1.5rem; vertical-align: middle; margin-right: 8px; cursor: pointer;">
+                View Project Code on GitHub
+            </button>
+        </div>
+
+    </section>
+    <hr>
+
+    <footer>
+        <nav class="nav-links-container">
+            <ul class="nav-links">
+                <li><a href="#research-homelab">Project Home</a></li>
+                <li><a href="./home.html">Academic</a></li>
+                <li><a href="./home.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <p>Copyright &copy; 2023 Shriyash Balasaheb Patil. All rights reserved.</p>
+         <p style="font-size: 0.8rem; margin-top: 5px;">Project submitted to Mahatma Education Society's Pillai HOC College of Arts, Science and Commerce[cite: 4, 8].</p>
+    </footer>
+
+    <script>
+        // Toggle function for the mobile hamburger menu (for compatibility)
+        function toggleMenu() {
+            const menu = document.querySelector(".menu-links");
+            const icon = document.querySelector(".hamburger-icon");
+            menu.classList.toggle("open");
+            icon.classList.toggle("open");
+        }
+    </script>
+
+</body>
+</html>
