@@ -2,7 +2,20 @@
 [build]
   publish = "/"
 
-# Handles SPA pushstate routing
+# Headers to ensure proper content types
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml"
+
+# Specific redirect for sitemap.xml
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+  force = true
+
+# Handles SPA pushstate routing (should be last)
 [[redirects]]
   from = "/*"
   to = "/index.html"
